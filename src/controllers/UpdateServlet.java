@@ -54,8 +54,15 @@ public class UpdateServlet extends HttpServlet {
 		    if(errors.size() > 0) {
 		        em.close();
 
+		        request.setAttribute("_token", request.getSession().getId());
+		        request.setAttribute("message",m);
+		        request.setAttribute("errors", errors);
+
+
+
 		    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/messages/edit.jsp");
 		    rd.forward(request, response);
+
 		}else{
 		    em.getTransaction().begin();
 		    em.getTransaction().commit();
